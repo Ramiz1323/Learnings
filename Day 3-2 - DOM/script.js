@@ -6,4 +6,7 @@ btn.addEventListener('click', function() {
     let c2 = Math.floor(Math.random() * 256);
     let c3 = Math.floor(Math.random() * 256);
     box.style.backgroundColor = `rgb(${c1}, ${c2}, ${c3})`;
+    let arr = ["Ramiz", "Aziz", "Sabir", "Kamran", "Rashad", "Rauf", "Murad", "Elvin"];
+    let name = Math.floor(Math.random() * arr.length);
+    console.log(arr[name]); 
 });
