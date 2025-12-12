@@ -19,7 +19,7 @@ Each folder represents a **day**, a **concept**, or a **mini-project**, showcasi
 - MongoDB  
 - Express.js  
 - React.js  
-- Node.js  
+- Node.js   
 
 ### ⚡ Advanced JavaScript
 - Closures  
