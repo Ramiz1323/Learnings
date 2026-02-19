@@ -1,5 +1,5 @@
 const userModel = require("../models/auth.model");
-const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 async function registerController(req, res) {
@@ -12,7 +12,7 @@ async function registerController(req, res) {
       .status(400)
       .json({ message: "Username or email already exists" });
   }
-  const hashedPassword = crypto.createHash("md5").update(password).digest("hex");
+  const hashedPassword = await bcrypt.hash(password, 10);
   const user = await userModel.create({
     username,
     email,
@@ -37,11 +37,11 @@ async function registerController(req, res) {
 
 async function loginController (req, res) {
   const { username, email, password } = req.body;
-  const hashedPassword = crypto.createHash("md5").update(password).digest("hex");
   const user = await userModel.findOne({
-    $or: [{ username }, { email }],
+    $or: [{ username }, { email }]
   });
-  if(!user || user.password !== hashedPassword){
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  if(!user || !isPasswordValid){
     return res.status(401).json({ message: "Invalid username/email or password" });
   }
   const token = jwt.sign({ id: user._id, name: user.username }, process.env.JWT_SECRET, {
