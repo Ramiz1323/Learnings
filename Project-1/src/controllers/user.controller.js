@@ -70,7 +70,46 @@ async function unfollowUserController(req, res) {
   res.status(200).json({ message: `You have unfollowed ${followeeName}` });
 }
 
+async function followStatusController(req, res) {
+  const loggedInUserName = req.user.name;
+  const followerName = req.params.followername;
+  const status = req.body.status;
+  const followRecord = await followModel.findOne({ follower: followerName, followee: loggedInUserName });
+
+  //Finding the request in the database
+  if (!followRecord) {
+    return res.status(404).json({ message: "Follow request not found" });
+  }
+
+  //Status must be either accepted or rejected
+  if (status !== "accepted" && status !== "rejected") {
+    return res.status(400).json({ message: "Status must be either accepted or rejected" });
+  }
+
+  //Only the followee can accept or reject the request
+  if (followRecord.followee !== loggedInUserName) {
+    return res.status(403).json({ message: "You are not authorized to perform this action" });
+  }
+
+  //If the request is rejected, then it should be deleted from the database
+  if (status === "rejected") {
+    await followModel.deleteOne({ follower: followerName, followee: loggedInUserName });
+    return res.status(200).json({ message: `You have rejected the follow request from ${followerName}` });
+  }
+
+  //If the request is already accepted or rejected, it cannot be updated
+  if (followRecord.status === "accepted") {
+    return res.status(400).json({ message: `You have already ${followRecord.status} this follow request` });
+  }
+
+  //Status update to the database
+  followRecord.status = status;
+  await followRecord.save();
+  res.status(200).json({ message: `You have ${status} the follow request from ${followerName}` });
+}
+
 module.exports = {
   followUserController,
   unfollowUserController,
+  followStatusController
 };
