@@ -29,7 +29,6 @@ async function registerController(req, res) {
     user:{
         email: user.email,
         username: user.username,
-        bio: user.bio,
         profileImage: user.profileImage
     }
   });
