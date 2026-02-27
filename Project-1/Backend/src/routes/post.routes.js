@@ -6,7 +6,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 const { indentifyUser } = require('../middlewares/auth.middleware.js');
 
 //  POST - /api/posts - Create a new post with image and caption
-postRouter.post("/", upload.single("img"), createPostController )
+postRouter.post("/", upload.single("img"), indentifyUser ,createPostController )
 
 // GET - /api/posts - Get all posts of the logged in user
 postRouter.get("/", indentifyUser, getPostController)

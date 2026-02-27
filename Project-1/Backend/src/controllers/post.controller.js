@@ -68,13 +68,15 @@ async function likePostController(req, res) {
   // Check if the post exists
   const postexists = await postModel.findById(postId);
   if (!postexists) {
-      return res.status(404).json({ message: "Post not found" });
+    return res.status(404).json({ message: "Post not found" });
   }
-  
+
   // Check if the user has already liked the post
   const isLiked = await likeModel.findOne({ user: req.user.id, post: postId });
   if (isLiked) {
-    return res.status(400).json({ message: "You have already liked this post" });
+    return res
+      .status(400)
+      .json({ message: "You have already liked this post" });
   }
 
   // Create a new like
@@ -93,10 +95,13 @@ async function likePostController(req, res) {
 }
 
 async function getFeedController(req, res) {
-  const feed = await postModel.find().populate("user");
-  res.status(200).json({ 
+  const feed = await Promise.all((await postModel.find().populate("user")).map(
+    async (post) => {
+      return post.caption
+    }))
+  res.status(200).json({
     message: "Feed fetched successfully",
-    feed
+    feed,
   });
 }
 
@@ -105,5 +110,5 @@ module.exports = {
   getPostController,
   getPostDetailsController,
   likePostController,
-  getFeedController
+  getFeedController,
 };
