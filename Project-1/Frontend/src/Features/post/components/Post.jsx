@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaRegHeart,
   FaRegComment,
+  FaHeart,
   FaRetweet,
   FaPaperPlane,
   FaRegBookmark,
 } from "react-icons/fa";
+import { useLike } from "../Hooks/usePost";
+import { useAuth } from "../../auth/Hooks/useAuth";
 
 const Post = ({ post }) => {
+  const { likePost } = useLike();
+  const { user } = useAuth();
+
+  const isLiked = post.likes?.some((id) => String(id) === String(user?._id));
+
+  const handleLike = () => {
+    likePost(post._id);
+  };
+
+  console.log("Post ID:", post._id, "isLiked status:", isLiked);
+  console.log("Rendering Post:", post._id, "Likes Count:", post.likes?.length);
   return (
     <div className="post">
       <div className="post_header">
@@ -25,13 +39,19 @@ const Post = ({ post }) => {
       <div className="post_footer">
         <div className="post_footer_icons">
           <div className="left_icons">
-            <FaRegHeart />
+            <span onClick={handleLike} style={{display: "flex", gap:"5px"}}>
+              <FaRegHeart />
+              <span className="like-count">{post.likes?.length || 0}</span>
+            </span>
+
             <FaRegComment />
             <FaRetweet />
             <FaPaperPlane />
           </div>
+
           <FaRegBookmark className="save_icon" />
         </div>
+
         <div className="post_footer_description">
           <h4>{post.user.username}</h4>
           <p>{post.caption}</p>

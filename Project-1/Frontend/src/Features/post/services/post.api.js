@@ -5,7 +5,12 @@ const api = axios.create({
     withCredentials: true
 })
 
-export async function getFeed() {
+export async function fetchFeedData() {
     const response = await api.get("/feed")
+    return response.data
+}
+
+export async function toggleLike(postId) {
+    const response = await api.post(`/like/${postId}`)
     return response.data
 }

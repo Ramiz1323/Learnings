@@ -62,41 +62,30 @@ async function getPostDetailsController(req, res) {
 }
 
 async function likePostController(req, res) {
-  const username = req.user.name;
   const postId = req.params.postId;
+  const userId = req.user.id;
 
-  // Check if the post exists
-  const postexists = await postModel.findById(postId);
-  if (!postexists) {
-      return res.status(404).json({ message: "Post not found" });
-  }
-  
-  // Check if the user has already liked the post
-  const isLiked = await likeModel.findOne({ user: req.user.id, post: postId });
-  if (isLiked) {
-    return res.status(400).json({ message: "You have already liked this post" });
+  const existingLike = await likeModel.findOne({ user: userId, post: postId });
+  if (existingLike) {
+    await likeModel.deleteOne({ _id: existingLike._id });
+  } else {
+    await likeModel.create({ user: userId, post: postId });
   }
 
-  // Create a new like
-  const like = await likeModel.create({
-    user: req.user.id,
-    post: postId,
-  });
+  const updatedLikes = await likeModel.find({ post: postId });
+  const likesArray = updatedLikes.map(l => l.user); 
+
   res.status(200).json({
-    message: "Post liked successfully",
-    like: {
-      likeId: like._id,
-      username: username,
-      postId: postId,
-    },
+    message: existingLike ? "Unliked" : "Liked",
+    likes: likesArray 
   });
 }
 
 async function getFeedController(req, res) {
-  const feed = await postModel.find().populate("user")
-  res.status(200).json({ 
+  const feed = await postModel.find().populate("user");
+  res.status(200).json({
     message: "Feed fetched successfully",
-    feed
+    feed,
   });
 }
 
@@ -105,5 +94,5 @@ module.exports = {
   getPostController,
   getPostDetailsController,
   likePostController,
-  getFeedController
+  getFeedController,
 };
