@@ -14,7 +14,7 @@ const Login = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     await handleLogin(username, password);
-    navigate("/");
+    navigate("/feed");
   }
 
   if (loading) {

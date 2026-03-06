@@ -1,0 +1,109 @@
+/* PAGE LAYOUT */
+
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+
+  background: #000;
+  color: #fafafa;
+
+  text-align: center;
+  padding: 20px;
+}
+
+/* MAIN CARD */
+
+.landing-content {
+  width: 100%;
+  max-width: 360px;
+
+  padding: 40px 30px;
+
+  border: 1px solid #262626;
+  border-radius: 10px;
+
+  background: #0a0a0a;
+}
+
+/* LOGO */
+
+.logo-text {
+  font-family: "Billabong", cursive;
+  font-size: 3.6rem;
+  margin-bottom: 12px;
+}
+
+/* TAGLINE */
+
+.tagline {
+  font-size: 1rem;
+  color: #a8a8a8;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* BUTTON GROUP */
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* BUTTON BASE */
+
+.btn {
+  display: block;
+  padding: 10px 0;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: 0.2s ease;
+}
+
+/* LOGIN BUTTON */
+
+.btn-primary {
+  background: #0095f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #007cd1;
+}
+
+/* SIGNUP BUTTON */
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #262626;
+  color: #0095f6;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 149, 246, 0.1);
+}
+
+/* FOOTER */
+
+.landing-footer {
+  margin-top: 30px;
+  font-size: 0.8rem;
+  color: #8e8e8e;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 480px) {
+  .landing-content {
+    border: none;
+    background: transparent;
+  }
+}

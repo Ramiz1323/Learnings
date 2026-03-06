@@ -1,123 +1,127 @@
-main {
-  color: white;
-  background-color: #0d0d0d;
-  margin-top: 60px;
-  padding: 10px;
+.feed-main-container {
+  color: #fafafa;
+  background-color: #000; 
+  min-height: 100vh;
+  padding-top: 30px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
 
-  .post {
-    border: 1px solid #2c2c2c;
-    border-radius: 0.7rem;
-    margin: 0 auto 20px;
+  .feed-list {
     width: 100%;
-    max-width: 500px;
-    min-height: 100%;
-    max-height: 100%;
-    background: #111;
+    max-width: 470px; 
     display: flex;
     flex-direction: column;
+    gap: 16px;
+  }
 
-    /* HEADER */
+  .post {
+    border-bottom: 1px solid #262626; 
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 16px;
+
     .post_header {
       display: flex;
       align-items: center;
-      padding: 0.6rem 1rem;
+      padding: 12px 4px;
+      order: -1; 
 
       img {
-        width: 2.8rem;
-        height: 2.8rem;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
-        margin-right: 0.8rem;
+        margin-right: 12px;
         object-fit: cover;
-        object-position: center;
+        border: 1px solid #333;
       }
 
       .post_header_info {
         h4 {
-          font-size: 0.95rem;
-          margin-bottom: 2px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          margin: 0;
+          color: #fafafa;
         }
         p {
-          font-size: 0.7rem;
-          color: #aaa;
+          font-size: 0.75rem;
+          color: #a8a8a8;
+          margin: 0;
         }
       }
     }
 
-    /* BODY */
-    .post_body img {
+
+    .post_body {
       width: 100%;
-      height: auto;
-      object-fit: cover;
-      object-position: center;
+      border: 1px solid #262626;
+      border-radius: 4px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block; 
+        max-height: 585px;
+        object-fit: contain;
+        background-color: #000;
+      }
     }
 
-    /* FOOTER */
     .post_footer {
-      padding-bottom: 10px;
-
       .post_footer_icons {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding: 10px 15px;
-
-        svg {
-          font-size: 1.4rem;
-          cursor: pointer;
-          transition: 0.2s;
-        }
-
-        svg:hover {
-          transform: scale(1.15);
-        }
+        padding: 12px 0 8px 0;
 
         .left_icons {
           display: flex;
-          gap: 15px;
-        }
-
-        .save_icon {
-          margin-left: auto;
+          gap: 16px;
+          
+          svg {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            &:hover { transform: scale(1.1); color: #8e8e8e; }
+          }
         }
       }
 
       .post_footer_description {
-        display: flex;
-        gap: 6px;
-        padding: 0 15px;
-
+        font-size: 0.9rem;
+        line-height: 1.4;
+        
         h4 {
-          font-size: 0.9rem;
+          display: inline;
+          font-weight: 600;
+          margin-right: 8px;
         }
-
+        
         p {
-          font-size: 0.85rem;
-          color: #d5d5d5;
+          display: inline;
+          color: #fafafa;
         }
       }
     }
   }
+}
 
-  /* 📱 Tablet */
-  @media (max-width: 768px) {
-    .post {
-      max-width: 95%;
-    }
-  }
+.feed-loading {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #a8a8a8;
+}
 
-  /* 📱 Mobile */
-  @media (max-width: 480px) {
-    .post {
-      border-radius: 0;
-      border-left: none;
-      border-right: none;
-    }
-
-    .post_footer_icons svg {
-      font-size: 1.3rem;
+@media (max-width: 480px) {
+  .feed-main-container {
+    padding-top: 0;
+    .feed-list { max-width: 100%; }
+    .post { 
+      border-bottom: 1px solid #262626;
+      .post_body { border-radius: 0; border-left: none; border-right: none; }
     }
   }
 }

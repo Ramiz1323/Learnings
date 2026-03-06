@@ -1,5 +1,5 @@
 import React from "react";
-import { AppRoutes } from "./routes";
+import AppRoutes from "./routes/app.routes.jsx";
 import "./style.scss";
 import { AuthProvider } from "./Features/auth/auth.context.jsX";
 import { PostProvider } from "./Features/post/post.context";
