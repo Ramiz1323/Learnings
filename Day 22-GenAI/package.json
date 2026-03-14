@@ -1,0 +1,23 @@
+{
+  "name": "day-22-genai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@langchain/core": "^1.1.32",
+    "@langchain/google-genai": "^2.1.25",
+    "@langchain/mistralai": "^1.0.7",
+    "dotenv": "^17.3.1",
+    "langchain": "^1.2.32",
+    "nodemailer": "^8.0.2",
+    "zod": "^4.3.6"
+  }
+}
