@@ -14,3 +14,17 @@ export async function toggleLike(postId) {
     const response = await api.post(`/like/${postId}`)
     return response.data
 }
+
+export async function createPost(formData) {
+    const response = await api.post("/", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
+    return response.data
+}
+
+export async function deletePostApi(postId) {
+    const response = await api.delete(`/${postId}`)
+    return response.data
+}

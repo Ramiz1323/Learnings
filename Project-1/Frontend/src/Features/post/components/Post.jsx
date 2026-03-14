@@ -20,8 +20,6 @@ const Post = ({ post }) => {
     likePost(post._id);
   };
 
-  console.log("Post ID:", post._id, "isLiked status:", isLiked);
-  console.log("Rendering Post:", post._id, "Likes Count:", post.likes?.length);
   return (
     <div className="post">
       <div className="post_header">

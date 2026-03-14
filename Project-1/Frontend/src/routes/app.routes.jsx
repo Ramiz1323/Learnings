@@ -5,6 +5,7 @@ import Landing from "../Features/auth/pages/Landing";
 import Login from "../Features/auth/pages/Login";
 import Register from "../Features/auth/pages/Register";
 import Feed from "../Features/post/pages/Feed";
+import CreatePost from "../Features/post/pages/CreatePost";
 import ProtectedRoute from "./protected.routes";
 
 const AppRoutes = () => {
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
             <Route path="/feed" element={<Feed />} />
+            <Route path="/create" element={<CreatePost />} />
           </Route>
         </Route>
 

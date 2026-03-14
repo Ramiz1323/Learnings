@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { fetchFeedData, toggleLike } from "./services/post.api";
+import { fetchFeedData, toggleLike, createPost } from "./services/post.api";
 
 export const PostContext = createContext();
 
@@ -38,6 +38,28 @@ const likePost = async (postId) => {
     console.error("Context update failed:", err);
   }
 };
+
+const addPost = async (formData) => {
+  setLoading(true);
+  try {
+    const data = await createPost(formData);
+    // Option 1: Refetch the feed
+    // await getFeed();
+    // Option 2: Prepend the new post if backend returns it
+    if (data.post) {
+      setFeed((prevFeed) => [data.post, ...prevFeed]);
+    } else {
+      await getFeed();
+    }
+    return data;
+  } catch (err) {
+    console.error("Post creation failed:", err);
+    throw err;
+  } finally {
+    setLoading(false);
+  }
+};
+
   return (
     <PostContext.Provider
       value={{
@@ -49,6 +71,7 @@ const likePost = async (postId) => {
         setFeed,
         getFeed,
         likePost,
+        addPost,
       }}
     >
       {children}
