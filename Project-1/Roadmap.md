@@ -21,7 +21,7 @@ A sequence-wise breakdown of the features and their performance logic.
 ## 4. Add Post Feature (Frontend)
 - **API Service**: Uses `FormData` to send images and text via `multipart/form-data`.
 - **Image Preview**: Implemented `FileReader` API to show users their selected image before uploading.
-- **State Integration**: Upon successful upload, the new post is **prepended** to the feed state, so it appears at the top without a full page reload.
+- **State Integration**: Upon successful upload, the new post is **prepended** to the feed state, so it appears at the top without a full page reload. 
 
 ## 5. Navigation & Layout
 - **Sidebar Navbar**: A persistent sidebar across all authenticated pages.
