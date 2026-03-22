@@ -21,5 +21,6 @@ public class ControlFlow {
                 //scanner should be closed to prevent resource leaks
                 //Otherwise, no need to use try-finally block
         }
-        }
+
+    }
 }
