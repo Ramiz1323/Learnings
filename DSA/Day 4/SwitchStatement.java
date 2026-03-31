@@ -21,7 +21,7 @@ public class SwitchStatement {
 
         //Lambda Expression
         switch (n) {
-            case 1,3,5,7,9 ->{             //Only Constant Value!
+            case 1,3,5,7,9 ->{             
                 System.out.println("The Number is Odd");
             }
             case 2,4,6,8,10->{
